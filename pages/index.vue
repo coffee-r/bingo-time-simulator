@@ -20,8 +20,15 @@
 				<CustomInputNumber class="mt-3" id='test4' :defaultValue="winningTime" :maxValue="120" @changeNotification="setWinningTime">1回の当選にかける秒数</CustomInputNumber>
 			</form>
 
+			<!-- TOPページリンク -->
+			<div class="text-center mt-6">
+				<button @click="simulate()" class="bg-black hover:bg-gray-700 text-white  py-2 px-4 rounded-full">
+					計算する
+				</button>
+			</div>
+
 			<!-- 計算結果 -->
-			<SimulationResultAlert class="mt-8" :resultType="simulationResultType">{{simulationResultMessage}}</SimulationResultAlert>
+			<SimulationResultAlert class="mt-6" :resultType="simulationResultType">{{simulationResultMessage}}</SimulationResultAlert>
 
 			<!-- 補足事項の説明 -->
 			<h2 class="mt-8">補足事項</h2>
@@ -58,25 +65,21 @@ const simulationResultMessage = ref("")
 // 参加人数を更新する
 const setPersonCount = (input) => {
 	personCount.value = Number(input)
-	simulate()
 }
 
 // 景品数を更新する
 const setWinningItemCount = (input) => {
 	winningItemCount.value = Number(input)
-	simulate()
 }
 
 // 1抽選あたりの時間を更新する
 const setLotteryTime = (input) => {
 	lotteryTime.value = Number(input)
-	simulate()
 }
 
 // 1当選あたりの時間を更新する
 const setWinningTime = (input) => {
 	winningTime.value = Number(input)
-	simulate()
 }
 
 // ビンゴ終了時間をシュミレーションする
@@ -101,9 +104,5 @@ const simulate = () => {
 	simulationResultType.value = 'success'
 	simulationResultMessage.value = "所要時間 " + Math.floor(result.minEndTimeSeconds / 60)+ " ~ " + Math.floor(result.maxEndTimeSeconds / 60) +"分 前後";
 }
-
-onMounted(() => {
-	simulate()
-})
 
 </script>
