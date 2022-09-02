@@ -102,8 +102,8 @@ const simulate = () => {
 	simulationResultMessage.value = "所要時間 " + Math.floor(result.minEndTimeSeconds / 60)+ " ~ " + Math.floor(result.maxEndTimeSeconds / 60) +"分 前後";
 }
 
-onMounted(() => {
-	simulate()
-})
+// onMounted(() => {
+// 	simulate()
+// })
 
 </script>
