@@ -1,11 +1,109 @@
 <template>
-  <Tutorial />
+
+	<!-- ビンゴシュミレーター部分・フッター部分 -->
+	<div class="max-w-3xl mx-auto">
+
+		<!-- ビンゴシュミレーター -->
+		<main class="mt-4 px-4 lg:px-0">
+
+			<!-- ページ説明 -->
+			<h1 class="font-semibold text-3xl">Bingo time simulator</h1>
+			<p>
+				パーティーや宴会などで行われるビンゴ大会にかかる時間をざっくり計算します。
+			</p>
+
+			<!-- 入力フォーム -->
+			<form class="mt-6">
+				<SerialNumberSelectBox class="mt-3" id='test1' :defaultSelectNumber="personCount" :maxSelectNumber="500" @changeNotification="setPersonCount">参加人数</SerialNumberSelectBox>
+				<SerialNumberSelectBox class="mt-3" id='test2' :defaultSelectNumber="winningItemCount" :maxSelectNumber="500" @changeNotification="setWinningItemCount">景品数</SerialNumberSelectBox>
+				<SerialNumberSelectBox class="mt-3" id='test3' :defaultSelectNumber="lotteryTime" :maxSelectNumber="180" @changeNotification="setLotteryTime">1回の番号抽選にかける秒数</SerialNumberSelectBox>
+				<SerialNumberSelectBox class="mt-3" id='test4' :defaultSelectNumber="winningTime" :maxSelectNumber="180" @changeNotification="setWinningTime">1回の当選にかける秒数</SerialNumberSelectBox>
+			</form>
+
+			<!-- 計算結果 -->
+			<SimulationResultAlert class="mt-8" :resultType="simulationResultType">{{simulationResultMessage}}</SimulationResultAlert>
+
+			<!-- 補足事項の説明 -->
+			<h2 class="mt-8">補足事項</h2>
+			<ul class="list-disc list-outside">
+				<li class="ml-5">プログラム上でビンゴ大会を100回開催し、その最短と最長の終了時間を計算します。</li>
+				<li class="ml-5">景品は参加者1人1個までとし、ダブルビンゴなどによる重複当選はなしの前提で計算します。</li>
+				<li class="ml-5">5×5マスのビンゴで計算します。</li>
+			</ul>
+		</main>
+
+		<!-- フッター -->
+		<CustomFooter />
+	</div>
+
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
+<script setup>
+import { ref, onMounted } from 'vue';
+import { BingoSheetFactory, LotteryBingoNumberStack, BingoTournament, BingoTournamentCollection } from '~/plugins/bingo.js';
+import SerialNumberSelectBox from "~/components/SerialNumberSelectBox.vue";
+import SimulationResultAlert from "~/components/SimulationResultAlert.vue";
+import CustomFooter from "~/components/CustomFooter.vue";
 
-export default Vue.extend({
-  name: 'IndexPage',
+// ビンゴ終了時間計算用の変数
+const personCount = ref(100)
+const winningItemCount = ref(20)
+const lotteryTime = ref(30)
+const winningTime = ref(60)
+
+// 計算結果表示用の変数
+const simulationResultType = ref("none")
+const simulationResultMessage = ref("")
+
+// 参加人数を更新する
+const setPersonCount = (input) => {
+	personCount.value = Number(input)
+	simulate()
+}
+
+// 景品数を更新する
+const setWinningItemCount = (input) => {
+	winningItemCount.value = Number(input)
+	simulate()
+}
+
+// 1抽選あたりの時間を更新する
+const setLotteryTime = (input) => {
+	lotteryTime.value = Number(input)
+	simulate()
+}
+
+// 1当選あたりの時間を更新する
+const setWinningTime = (input) => {
+	winningTime.value = Number(input)
+	simulate()
+}
+
+// ビンゴ終了時間をシュミレーションする
+const simulate = () => {
+
+	// 重複の当選は想定していないため
+	// 景品数が参加者数を上回った状態で計算しないようにする
+	if(personCount.value < winningItemCount.value){
+		simulationResultType.value = 'fail'
+		simulationResultMessage.value = '景品数を参加人数より少なくしてください'
+		return;
+	}
+
+	// ビンゴ大会を100回試行する
+	let bingoTournamentCollection = new BingoTournamentCollection([]);
+	for(let i=0; i<100; i++){
+		bingoTournamentCollection = bingoTournamentCollection.add(new BingoTournament(BingoSheetFactory, new LotteryBingoNumberStack(), personCount.value, winningItemCount.value, lotteryTime.value, winningTime.value));
+	}
+	const result = bingoTournamentCollection.calculatePlayTime();
+
+	// 計算結果を更新する
+	simulationResultType.value = 'success'
+	simulationResultMessage.value = "所要時間 " + Math.floor(result.minEndTimeSeconds / 60)+ " ~ " + Math.floor(result.maxEndTimeSeconds / 60) +"分 前後";
+}
+
+onMounted(() => {
+	simulate()
 })
+
 </script>
