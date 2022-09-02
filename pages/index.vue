@@ -64,22 +64,22 @@ const simulationResultMessage = ref("")
 
 // 参加人数を更新する
 const setPersonCount = (input) => {
-	personCount.value = Number(input)
+	personCount.value = input
 }
 
 // 景品数を更新する
 const setWinningItemCount = (input) => {
-	winningItemCount.value = Number(input)
+	winningItemCount.value =input
 }
 
 // 1抽選あたりの時間を更新する
 const setLotteryTime = (input) => {
-	lotteryTime.value = Number(input)
+	lotteryTime.value = input
 }
 
 // 1当選あたりの時間を更新する
 const setWinningTime = (input) => {
-	winningTime.value = Number(input)
+	winningTime.value = input
 }
 
 // ビンゴ終了時間をシュミレーションする
