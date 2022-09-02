@@ -46,10 +46,14 @@ import SimulationResultAlert from "~/components/SimulationResultAlert.vue";
 import CustomFooter from "~/components/CustomFooter.vue";
 
 // ビンゴ終了時間計算用の変数
-const personCount = ref(100)
-const winningItemCount = ref(20)
-const lotteryTime = ref(30)
-const winningTime = ref(60)
+// const personCount = ref(100)
+// const winningItemCount = ref(20)
+// const lotteryTime = ref(30)
+// const winningTime = ref(60)
+const personCount = ref(1)
+const winningItemCount = ref(1)
+const lotteryTime = ref(1)
+const winningTime = ref(1)
 
 // 計算結果表示用の変数
 const simulationResultType = ref("none")
