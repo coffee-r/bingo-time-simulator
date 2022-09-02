@@ -6,11 +6,11 @@ const props = defineProps({
         type: String,
         required: true
     },
-    defaultSelectNumber: {
+    defaultValue: {
         type: Number,
         required: true
     },
-    maxSelectNumber: {
+    maxValue: {
         type: Number,
         required: true
     },
@@ -20,7 +20,7 @@ const emits = defineEmits([
     "changeNotification"
 ])
 
-const currentSelectValue = ref(props.defaultSelectNumber)
+const currentValue = ref(props.defaultValue)
 
 </script>
 
@@ -29,8 +29,6 @@ const currentSelectValue = ref(props.defaultSelectNumber)
 		<label :for="id" class="block mb-2 font-medium text-gray-900 dark:text-gray-300">
 			<slot />
 		</label>
-		<select :id="id" v-model="currentSelectValue" @change="emits('changeNotification', currentSelectValue)" class="bg-gray-50 border border-gray-300 text-gray-900 rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-		<option v-for="(value, key) in maxSelectNumber" :key="key">{{ value }}</option>
-		</select>
+        <input type="number" min="0" :max="maxValue" :id="id" v-model="currentValue" @change="emits('changeNotification', currentValue)" class="bg-gray-50 border border-gray-300 text-gray-900 rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
 	</div>
 </template>

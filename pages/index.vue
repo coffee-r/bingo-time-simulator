@@ -14,10 +14,10 @@
 
 			<!-- 入力フォーム -->
 			<form class="mt-6">
-				<SerialNumberSelectBox class="mt-3" id='test1' :defaultSelectNumber="personCount" :maxSelectNumber="500" @changeNotification="setPersonCount">参加人数</SerialNumberSelectBox>
-				<SerialNumberSelectBox class="mt-3" id='test2' :defaultSelectNumber="winningItemCount" :maxSelectNumber="500" @changeNotification="setWinningItemCount">景品数</SerialNumberSelectBox>
-				<SerialNumberSelectBox class="mt-3" id='test3' :defaultSelectNumber="lotteryTime" :maxSelectNumber="180" @changeNotification="setLotteryTime">1回の番号抽選にかける秒数</SerialNumberSelectBox>
-				<SerialNumberSelectBox class="mt-3" id='test4' :defaultSelectNumber="winningTime" :maxSelectNumber="180" @changeNotification="setWinningTime">1回の当選にかける秒数</SerialNumberSelectBox>
+				<CustomInputNumber class="mt-3" id='test1' :defaultValue="personCount" :maxValue="300" @changeNotification="setPersonCount">参加人数</CustomInputNumber>
+				<CustomInputNumber class="mt-3" id='test2' :defaultValue="winningItemCount" :maxValue="200" @changeNotification="setWinningItemCount">景品数</CustomInputNumber>
+				<CustomInputNumber class="mt-3" id='test3' :defaultValue="lotteryTime" :maxValue="100" @changeNotification="setLotteryTime">1回の番号抽選にかける秒数</CustomInputNumber>
+				<CustomInputNumber class="mt-3" id='test4' :defaultValue="winningTime" :maxValue="120" @changeNotification="setWinningTime">1回の当選にかける秒数</CustomInputNumber>
 			</form>
 
 			<!-- 計算結果 -->
@@ -41,19 +41,15 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { BingoSheetFactory, LotteryBingoNumberStack, BingoTournament, BingoTournamentCollection } from '~/plugins/bingo.js';
-import SerialNumberSelectBox from "~/components/SerialNumberSelectBox.vue";
+import CustomInputNumber from "~/components/CustomInputNumber.vue";
 import SimulationResultAlert from "~/components/SimulationResultAlert.vue";
 import CustomFooter from "~/components/CustomFooter.vue";
 
 // ビンゴ終了時間計算用の変数
-// const personCount = ref(100)
-// const winningItemCount = ref(20)
-// const lotteryTime = ref(30)
-// const winningTime = ref(60)
-const personCount = ref(1)
-const winningItemCount = ref(1)
-const lotteryTime = ref(1)
-const winningTime = ref(1)
+const personCount = ref(100)
+const winningItemCount = ref(20)
+const lotteryTime = ref(30)
+const winningTime = ref(60)
 
 // 計算結果表示用の変数
 const simulationResultType = ref("none")
@@ -106,8 +102,8 @@ const simulate = () => {
 	simulationResultMessage.value = "所要時間 " + Math.floor(result.minEndTimeSeconds / 60)+ " ~ " + Math.floor(result.maxEndTimeSeconds / 60) +"分 前後";
 }
 
-// onMounted(() => {
-// 	simulate()
-// })
+onMounted(() => {
+	simulate()
+})
 
 </script>
