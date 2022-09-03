@@ -14,10 +14,10 @@
 
 			<!-- 入力フォーム -->
 			<form class="mt-6">
-				<CustomInputNumber class="mt-3" id='test1' :defaultValue="personCount" :maxValue="300" @changeNotification="setPersonCount">参加人数</CustomInputNumber>
-				<CustomInputNumber class="mt-3" id='test2' :defaultValue="winningItemCount" :maxValue="200" @changeNotification="setWinningItemCount">景品数</CustomInputNumber>
-				<CustomInputNumber class="mt-3" id='test3' :defaultValue="lotteryTime" :maxValue="100" @changeNotification="setLotteryTime">1回の番号抽選にかける秒数</CustomInputNumber>
-				<CustomInputNumber class="mt-3" id='test4' :defaultValue="winningTime" :maxValue="120" @changeNotification="setWinningTime">1回の当選にかける秒数</CustomInputNumber>
+				<CustomInputNumber class="mt-3" id='test1' :defaultValue="personCount" :maxValue="500" @changeNotification="setPersonCount">参加人数</CustomInputNumber>
+				<CustomInputNumber class="mt-3" id='test2' :defaultValue="winningItemCount" :maxValue="300" @changeNotification="setWinningItemCount">景品数</CustomInputNumber>
+				<CustomInputNumber class="mt-3" id='test3' :defaultValue="lotteryTime" :maxValue="180" @changeNotification="setLotteryTime">1回の番号抽選にかける秒数</CustomInputNumber>
+				<CustomInputNumber class="mt-3" id='test4' :defaultValue="winningTime" :maxValue="180" @changeNotification="setWinningTime">1回の当選にかける秒数</CustomInputNumber>
 			</form>
 
 			<!-- TOPページリンク -->
