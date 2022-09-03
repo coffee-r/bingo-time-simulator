@@ -29,7 +29,7 @@
         <!-- TOPページリンク -->
         <div class="text-center mt-8">
             <a href="/">
-                <button class="bg-black hover:bg-gray-700 text-white  py-2 px-4 rounded-full">
+                <button class="bg-black hover:bg-gray-700 text-white text-lg font-semibold py-3 px-6 rounded-full">
                     TOPへ戻る
                 </button>
             </a>

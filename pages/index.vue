@@ -22,7 +22,7 @@
 
 			<!-- TOPページリンク -->
 			<div class="text-center mt-6">
-				<button @click="simulate()" class="bg-black hover:bg-gray-700 text-white  py-2 px-4 rounded-full">
+				<button @click="simulate()" class="bg-black hover:bg-gray-700 text-white text-lg font-semibold py-3 px-6 rounded-full">
 					計算する
 				</button>
 			</div>
