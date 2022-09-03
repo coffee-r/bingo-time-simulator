@@ -29,6 +29,11 @@ const onChange = () => {
     // 0フィルを削除しつつ、数値型にする
     currentValue.value = Number(currentValue.value)
 
+    // 最大値を超えた場合は最大値に設定する
+    if(currentValue.value > props.maxValue){
+        currentValue.value = props.maxValue
+    }
+
     // 親コンポーネントに値を通知する
     emits('changeNotification', currentValue.value)
 }
