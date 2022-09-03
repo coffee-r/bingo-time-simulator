@@ -1,10 +1,10 @@
 <template>
 
     <!-- プライバシーポリシー・TOPページリンク・フッター -->
-    <main>
+    <main class="pt-8">
 
         <!-- プライバシーポリシー -->
-        <article class="prose prose-sm sm:prose-base lg:prose-base max-w-3xl mx-2 mx-auto bg-white px-4 pt-8">
+        <article class="prose prose-sm sm:prose-base lg:prose-base max-w-3xl mx-auto">
             
             <h1 class="text-center">プライバシーポリシー</h1>
             <p>
@@ -36,7 +36,7 @@
         </div>
 
         <!-- フッター -->
-		<CustomFooter />
+		<CustomFooter class="max-w-3xl mx-auto" />
 
     </main>
 
