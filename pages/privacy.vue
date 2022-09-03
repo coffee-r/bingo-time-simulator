@@ -4,7 +4,7 @@
     <main class="pt-8">
 
         <!-- プライバシーポリシー -->
-        <article class="prose prose-sm sm:prose-base lg:prose-base max-w-3xl mx-auto">
+        <article class="prose prose-sm sm:prose-base lg:prose-base max-w-3xl mx-auto px-4 lg:px-0">
             
             <h1 class="text-center">プライバシーポリシー</h1>
             <p>
