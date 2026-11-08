@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "destination": "https://bingo-time-simulator-v2.game-developer-ryo.workers.dev/",
+      "statusCode": 301
+    }
+  ]
+}
